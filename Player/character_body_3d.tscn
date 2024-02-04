@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://du7pj2tqf3rd2"]
+
+[ext_resource type="PackedScene" uid="uid://w5n0d87q6ygr" path="res://Player/3D Model/Ness/ness.dae" id="1_iw81a"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o1bdu"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1ci76"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_o1bdu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CapsuleMesh_1ci76")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="ness" parent="." instance=ExtResource("1_iw81a")]
+transform = Transform3D(-0.13, -1.96295e-08, 8.58031e-16, 0, -5.68248e-09, -0.13, 1.96295e-08, -0.13, 5.68248e-09, 0, -0.853121, 0)

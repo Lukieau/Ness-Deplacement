@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://d17kmcos6bp7f"]
+
+[ext_resource type="PackedScene" uid="uid://b16ec1w86xxp7" path="res://Map/area_3d.tscn" id="1_0s5xh"]
+[ext_resource type="PackedScene" uid="uid://csmg2mvfpcdqg" path="res://Map/asset/rigid_body_3d.tscn" id="1_6u5gm"]
+[ext_resource type="PackedScene" uid="uid://du7pj2tqf3rd2" path="res://Player/character_body_3d.tscn" id="2_0n2gg"]
+[ext_resource type="Script" path="res://Map/area_3d.gd" id="2_hro1x"]
+[ext_resource type="Script" path="res://Player/character_body_3d.gd" id="3_5p1hc"]
+[ext_resource type="Script" path="res://Player/camera/Camera3D.gd" id="5_kep3e"]
+[ext_resource type="Script" path="res://Noeud 3D/TextEdit.gd" id="6_da1md"]
+[ext_resource type="PackedScene" uid="uid://bg7syhcvlwq61" path="res://Map/skybox/world_environment.tscn" id="6_yt7ge"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="RigidBody3D" parent="." instance=ExtResource("1_6u5gm")]
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 20.5132, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.854848, 0.518878, 0, -0.518878, 0.854848, 0, 9.68966, 10.4578)
+
+[node name="Area3D" parent="." instance=ExtResource("1_0s5xh")]
+script = ExtResource("2_hro1x")
+
+[node name="Player" parent="." instance=ExtResource("2_0n2gg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00835, 13.6108)
+script = ExtResource("3_5p1hc")
+
+[node name="camOrigin2" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.961583, 0.274513, 0, -0.274513, 0.961583, 0, 0.701653, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Player/camOrigin2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.30406)
+spring_length = 2.0
+margin = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="Player/camOrigin2/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 0, 1, 0, 1.10893, 3.07919)
+script = ExtResource("5_kep3e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Player/camOrigin2/SpringArm3D/Camera3D"]
+
+[node name="TextEdit" type="TextEdit" parent="Player/camOrigin2/SpringArm3D/Camera3D/CanvasLayer"]
+offset_right = 252.0
+offset_bottom = 78.0
+text = "while 1:
+		print(PLAYER_POSITION)"
+script = ExtResource("6_da1md")
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("6_yt7ge")]

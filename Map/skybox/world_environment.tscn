@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg7syhcvlwq61"]
+
+[ext_resource type="Texture2D" uid="uid://bu22v3wjt7pud" path="res://Map/skybox/v6gfeuoz3ou51.jpg" id="1_t8j08"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_5d0g1"]
+panorama = ExtResource("1_t8j08")
+
+[sub_resource type="Sky" id="Sky_ftmun"]
+sky_material = SubResource("PanoramaSkyMaterial_5d0g1")
+
+[sub_resource type="Environment" id="Environment_btkev"]
+background_mode = 2
+background_color = Color(1, 0, 0, 1)
+sky = SubResource("Sky_ftmun")
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_btkev")
